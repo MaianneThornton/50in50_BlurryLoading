@@ -1,4 +1,4 @@
-# 50 Projects in 50 Days - Title
+# 50 Projects in 50 Days - Blurry Loading
 
 This is a code along project in the [50 Projects In 50 Days - HTML, CSS & JavaScript Udemy Course](https://www.udemy.com/course/50-projects-50-days/). Sharpen your skills by building 50 quick, unique & fun mini projects.
 
@@ -25,7 +25,7 @@ Welcome to the fifth mini-project of the course!
 
 In this project users will be able to:
 
-- Build a responsive site that displays a functional progress bar.
+- Build a responsive site that displays a loading text as well as blurs the background while loading.
 
 ### Screenshot🌇
 
@@ -33,12 +33,12 @@ In this project users will be able to:
 
 ### Links👩🏾‍💻
 
-- Solution URL: (https://github.com/MaianneThornton/50in50_ProgressSteps)
+- Solution URL: (https://github.com/MaianneThornton/50in50_BlurryLoading)
 - Live Site URL: (https://frolicking-biscotti-f94d2f.netlify.app/)
 
 ## My process💭
 
-This is a simple project that I started by marking out initial classes and id's in the html file to be later used for styling. Next I began styling the css by styling the line, circles, and buttons. I then added functionality by way of JavaScript to switch between classes when the user clicks on a button.
+This is a simple project that I started by marking out initial classes in the html file to be later used for styling. Next I began styling the css by styling the background and loading text. I then added functionality by way of JavaScript to countdown the loading percentage, while blurring that text down to zero. I also added functionality by adding a blur on the background image starting at fully opaque and slowly increasing its visibility.
 
 ### Built with👷🏾‍♀️
 
@@ -49,57 +49,62 @@ This is a simple project that I started by marking out initial classes and id's 
 
 ### What I learned👩🏾‍🏫
 
-I learned the logic behind making a simple progress bar functional. I will be applying this to future projects where needed.
+I learned the logic behind making a functional blurry loading page. I will be applying this to future projects where needed.
 
-I also learned that when using the before or after selectors you MUST add content for the style to be visible.
+I learned that opacity is a scale from 0 (not opaque) to 1 (opaque).
+
+I also learned how to map a range of numbers to another range of numbers. (See [Useful Resources](#useful-resources) section)
 
 ### Continued development🔮
 
 In the future I plan on continuing to practice positioning elements using flexbox, and using different selectors such as nth of type to select elements.
-
-I also plan on continuing to practice using event listeners to make my pages more functional.
 
 I also plan on continuing to learn the best ways to phrase git commits, so that future viewers can fully understand the changes that have occurred.
 
 ### I'm really proud of these code snippets✂️
 
 ```css
-.progress-container::before {
-  content: '';
-  background-color: var(--line-border-empty);
+.bg {
+  background: url('https://images.unsplash.com/photo-1576161787924-01bb08dad4a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2104&q=80')
+    no-repeat center center/cover;
   position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  height: 4px;
-  width: 100%;
+  /* Prevents extra blurry edges from showing */
+  top: -30px;
+  left: -30px;
+  width: calc(100vw + 60px);
+  height: calc(100vh + 60px);
   z-index: -1;
-}
+  filter: blur(0px);
 ```
 
 ```js
-next.addEventListener('click', () => {
-  currentActive++;
+function blurring() {
+  load++
 
-  if (currentActive > circles.length) {
-    currentActive = circles.length;
+  // Stops running when int = 100
+  if (load > 99) {
+    clearInterval(int)
   }
-  update();
-});
 
-prev.addEventListener('click', () => {
-  currentActive--;
+  loadText.innerText = `${load}%`
+  // Opacity is a scale from 0 (not opaque) to 1 (opaque)
+  // Fades out the loading percentage text
+  loadText.style.opacity = scale(load, 0, 100, 1, 0)
+  // Fades out the bg image blur from 30px to 0px
+  bg.style.filter = `blur(${scale(load, 0, 100, 30, 0)}px)`
+}
 
-  if (currentActive < 1) {
-    currentActive = 1;
-  }
-  update();
-});
+// https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers
+const scale = (num, in_min, in_max, out_min, out_max) => {
+  return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
+}
 ```
 
 ### Useful resources📖
 
-- [Resource](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/) - This is an amazing article which helped me write better commit messages. I'd recommend it to anyone still learning this concept.
+- [Resource 1](https://stackoverflow.com/questions/10756313/javascript-jquery-map-a-range-of-numbers-to-another-range-of-numbers) - This is an amazing stack overflow post which helped to determine how to program the opacity of the loading percent text. Using this post I was easily able to map the loading percentage (0 - 100) to the opacity (0 - 1).
+- [Resource 2](https://www.freecodecamp.org/news/how-to-write-better-git-commit-messages/) - This is an amazing article which helped me write better commit messages. I'd recommend it to anyone still learning this concept.
+
 
 ## Author🔎
 
