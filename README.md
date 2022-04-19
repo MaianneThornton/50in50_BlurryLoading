@@ -34,7 +34,7 @@ In this project users will be able to:
 ### Links👩🏾‍💻
 
 - Solution URL: (https://github.com/MaianneThornton/50in50_BlurryLoading)
-- Live Site URL: (https://frolicking-biscotti-f94d2f.netlify.app/)
+- Live Site URL: (https://blurry-loadingpage.netlify.app/)
 
 ## My process💭
 
